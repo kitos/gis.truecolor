@@ -1,4 +1,4 @@
-package ru.rsreu.is.gis.truecolor;
+package ru.rsreu.is.gis.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

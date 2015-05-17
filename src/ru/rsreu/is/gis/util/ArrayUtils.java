@@ -1,4 +1,4 @@
-package ru.rsreu.is.gis.truecolor;
+package ru.rsreu.is.gis.util;
 
 final public class ArrayUtils {
     private ArrayUtils() {

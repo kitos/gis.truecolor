@@ -1,4 +1,4 @@
-package ru.rsreu.is.gis.truecolor.bmp;
+package ru.rsreu.is.gis.img.bmp;
 
 public class BitMapFileHeader {
     public final short bfType = 0x4d42; // 'BM'

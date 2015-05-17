@@ -1,4 +1,4 @@
-package ru.rsreu.is.gis.truecolor.bmp;
+package ru.rsreu.is.gis.img.bmp;
 
 public class BitMapInfoHeader {
     public final int biSize = 40; // размер заголовка

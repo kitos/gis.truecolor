@@ -1,8 +1,6 @@
 package ru.rsreu.is.gis.util;
 
 final public class ArrayUtils {
-    private ArrayUtils() {
-    }
 
     public static void reverse(byte[] bytes) {
         for (int i = 0; i < bytes.length / 2; i++) {
@@ -28,5 +26,9 @@ final public class ArrayUtils {
         }
 
         return result;
+    }
+
+    public static byte[] empty() {
+        return new byte[0];
     }
 }

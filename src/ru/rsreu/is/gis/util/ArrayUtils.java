@@ -2,12 +2,13 @@ package ru.rsreu.is.gis.util;
 
 final public class ArrayUtils {
 
-    public static void reverse(byte[] bytes) {
+    public static byte[] reverse(byte[] bytes) {
         for (int i = 0; i < bytes.length / 2; i++) {
             byte temp = bytes[i];
             bytes[i] = bytes[bytes.length - i - 1];
             bytes[bytes.length - i - 1] = temp;
         }
+        return bytes;
     }
 
     public static byte[] concat(byte[]... arrays) {

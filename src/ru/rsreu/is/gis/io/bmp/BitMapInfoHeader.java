@@ -1,4 +1,6 @@
-package ru.rsreu.is.gis.img.bmp;
+package ru.rsreu.is.gis.io.bmp;
+
+import ru.rsreu.is.gis.util.SerializationUtils;
 
 public class BitMapInfoHeader {
     public final int biSize = 40; // размер заголовка
@@ -13,4 +15,7 @@ public class BitMapInfoHeader {
     public int biBeClrUsed = 0;        // быть
     public int biBeClrImportant = 0;   // такими
 
+    public static int length() {
+        return SerializationUtils.length(BitMapInfoHeader.class);
+    }
 }

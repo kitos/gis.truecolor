@@ -1,7 +1,11 @@
 package ru.rsreu.is.gis.view;
 
+import ru.rsreu.is.gis.io.bmp.BmpFile;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +21,14 @@ public class MainWindow extends JFrame {
         initComponents();
 
         pack();
+        отцентроватьОкно();
+    }
+
+    private void отцентроватьОкно() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) (screenSize.getWidth() - getWidth()) / 2;
+        int y = (int) (screenSize.getHeight() - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     private void initComponents() {
@@ -37,6 +49,9 @@ public class MainWindow extends JFrame {
         fileMenu.add(openMenuItem);
         openMenuItem.addActionListener(event -> {
             JFileChooser openImageFileChooser = new JFileChooser();
+            openImageFileChooser.setCurrentDirectory(new File("."));
+            openImageFileChooser.setAcceptAllFileFilterUsed(false);
+            openImageFileChooser.setFileFilter(new FileNameExtensionFilter("BMP Files", "bmp"));
             if (openImageFileChooser.showDialog(this, "Open image") == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = openImageFileChooser.getSelectedFile();
                 if (selectedFile.exists()) {
@@ -44,7 +59,9 @@ public class MainWindow extends JFrame {
                     try {
                         image = ImageIO.read(selectedFile);
                         imageComponent.setImage(image);
+                        BmpFile bmpFile = new BmpFile(selectedFile);
                         pack();
+                        отцентроватьОкно();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -64,5 +81,4 @@ public class MainWindow extends JFrame {
         JMenuItem aboutMenuItem = new JMenuItem("About");
         helpMenu.add(aboutMenuItem);
     }
-
 }

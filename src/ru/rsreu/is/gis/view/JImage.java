@@ -18,7 +18,10 @@ class JImage extends Component {
     public void paint(Graphics g) {
         super.paint(g);
         if (image != null) {
-            g.drawImage(image, 0, 0, null);
+            // центруем изображение
+            int x = (getWidth() - image.getWidth(null)) / 2;
+            int y = (getHeight() - image.getHeight(null)) / 2;
+            g.drawImage(image, x, y, null);
         }
     }
 
@@ -26,7 +29,7 @@ class JImage extends Component {
     public Dimension getPreferredSize() {
         return image != null
                 ? new Dimension(image.getWidth(null), image.getHeight(null))
-                : new Dimension(100, 100);
+                : new Dimension(400, 300);
     }
 
     public void setImage(Image image) {

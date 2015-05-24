@@ -60,7 +60,7 @@ public class KursachUtils {
             // вытаскиваем из массива всех полуразностей те, что необходимы для восстановления на текущей итерации
             byte[] diffs = Arrays.copyOf(encodedImageBytes[1], avgs.length);
             byte[] newAvgs = new byte[avgs.length * 2];
-            // восстановливаем полусуммы (или, возможно, исходный массив)
+            // восстанавливаем полусуммы (или, возможно, исходный массив)
             for (int i = 0; i < avgs.length * 2; i += 2) {
                 byte diff = diffs[i / 2];
                 byte avg = avgs[i / 2];

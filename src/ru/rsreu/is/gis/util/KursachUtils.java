@@ -3,7 +3,7 @@ package ru.rsreu.is.gis.util;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class KursachUtils {
+final public class KursachUtils {
 
     public static byte[][] encode(byte[] imageBytes, int iterations) {
         return average(new byte[][]{imageBytes, ArrayUtils.empty()}, iterations);

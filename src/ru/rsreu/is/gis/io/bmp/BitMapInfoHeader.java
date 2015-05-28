@@ -3,7 +3,7 @@ package ru.rsreu.is.gis.io.bmp;
 import ru.rsreu.is.gis.util.SerializationUtils;
 
 public class BitMapInfoHeader {
-    public final int biSize = 40; // размер заголовка
+    public int biSize = 40; // размер заголовка
     public int biWidth;
     public int biHeight;
     public final short biPlains = 1;

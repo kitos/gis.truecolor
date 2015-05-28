@@ -1,6 +1,8 @@
 package ru.rsreu.is.gis.view;
 
 import ru.rsreu.is.gis.io.bmp.BmpFile;
+import ru.rsreu.is.gis.util.ArrayUtils;
+import ru.rsreu.is.gis.util.KursachUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,11 +11,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MainWindow extends JFrame {
 
     private JMenuBar menuBar;
     private JImage imageComponent;
+
+    private File currentFile;
 
     public MainWindow() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,8 +55,7 @@ public class MainWindow extends JFrame {
         JMenuItem openMenuItem = new JMenuItem("Open");
         fileMenu.add(openMenuItem);
         openMenuItem.addActionListener(event -> {
-            JFileChooser openImageFileChooser = new JFileChooser();
-            openImageFileChooser.setCurrentDirectory(new File("."));
+            JFileChooser openImageFileChooser = new JFileChooser(".");
             openImageFileChooser.setAcceptAllFileFilterUsed(false);
             openImageFileChooser.setFileFilter(new FileNameExtensionFilter("BMP Files", "bmp"));
             if (openImageFileChooser.showDialog(this, "Open image") == JFileChooser.APPROVE_OPTION) {
@@ -57,9 +63,9 @@ public class MainWindow extends JFrame {
                 if (selectedFile.exists()) {
                     BufferedImage image = null;
                     try {
+                        currentFile = selectedFile;
                         image = ImageIO.read(selectedFile);
                         imageComponent.setImage(image);
-                        BmpFile bmpFile = new BmpFile(selectedFile);
                         pack();
                         отцентроватьОкно();
                     } catch (IOException e) {
@@ -68,6 +74,58 @@ public class MainWindow extends JFrame {
                 }
             }
 
+        });
+        fileMenu.addSeparator();
+        JMenuItem saveAsWavelet = new JMenuItem("Compress");
+        fileMenu.add(saveAsWavelet);
+        saveAsWavelet.addActionListener(event -> {
+            try {
+                BmpFile bmp = new BmpFile(currentFile);
+                JFileChooser saveFileChooser = new JFileChooser(".");
+                saveFileChooser.setAcceptAllFileFilterUsed(false);
+                saveFileChooser.setFileFilter(new FileNameExtensionFilter("Wavelet encoded bmp", "wvl"));
+                if (saveFileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = saveFileChooser.getSelectedFile();
+                    byte[][] encode = KursachUtils.encode(bmp.getPixels(), 4);
+                    bmp.getFileHeader().avgLength = (short) encode[0].length;
+                    bmp.setPixels(ArrayUtils.concat(encode));
+                    Files.write(selectedFile.toPath(), bmp.bytes());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        JMenuItem decodeMenuItem = new JMenuItem("Decode");
+        fileMenu.add(decodeMenuItem);
+        decodeMenuItem.addActionListener(event -> {
+            JFileChooser saveFileChooser = new JFileChooser(".");
+            saveFileChooser.setAcceptAllFileFilterUsed(false);
+            saveFileChooser.setFileFilter(new FileNameExtensionFilter("Wavelet encoded bmp", "wvl"));
+
+            if (saveFileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = saveFileChooser.getSelectedFile();
+                BmpFile bmp = new BmpFile(selectedFile);
+                bmp.setPixels(KursachUtils.decode(bmp.getPixels(), bmp.getFileHeader().avgLength));
+                Path tempFile = null;
+                try {
+                    tempFile = Files.createTempFile(Paths.get("."), "temp", "bmp");
+                    Files.write(tempFile, bmp.bytes());
+                    imageComponent.setImage(ImageIO.read(tempFile.toFile()));
+                    pack();
+                    отцентроватьОкно();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (tempFile != null) {
+                        try {
+                            Files.deleteIfExists(tempFile);
+                        } catch (IOException e) {
+                        }
+                    }
+
+                }
+            }
         });
         fileMenu.addSeparator();
 

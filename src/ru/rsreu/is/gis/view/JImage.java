@@ -3,7 +3,7 @@ package ru.rsreu.is.gis.view;
 import java.awt.*;
 import java.util.Objects;
 
-class JImage extends Component {
+public class JImage extends Component {
 
     private Image image;
 

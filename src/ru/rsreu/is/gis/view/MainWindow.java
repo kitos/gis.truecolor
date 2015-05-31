@@ -1,9 +1,6 @@
 package ru.rsreu.is.gis.view;
 
-import ru.rsreu.is.gis.action.DecodeActionListener;
-import ru.rsreu.is.gis.action.EncodeActionListener;
-import ru.rsreu.is.gis.action.OpenBmpActionListener;
-import ru.rsreu.is.gis.action.SaveBmpActionListener;
+import ru.rsreu.is.gis.action.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,6 +81,10 @@ public class MainWindow extends JFrame {
         JMenuItem decodeMenuItem = new JMenuItem("Decode");
         fileMenu.add(decodeMenuItem);
         decodeMenuItem.addActionListener(new DecodeActionListener(this));
+
+        JMenuItem compareMenuItem = new JMenuItem("Compare");
+        fileMenu.add(compareMenuItem);
+        compareMenuItem.addActionListener(new CompareActionListener(this));
         fileMenu.addSeparator();
 
         JMenuItem exitMenuItem = new JMenuItem("Exit");

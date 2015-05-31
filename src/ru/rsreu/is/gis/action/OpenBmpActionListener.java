@@ -1,5 +1,6 @@
 package ru.rsreu.is.gis.action;
 
+import ru.rsreu.is.gis.io.bmp.BmpFile;
 import ru.rsreu.is.gis.view.MainWindow;
 
 import javax.imageio.ImageIO;
@@ -22,7 +23,7 @@ public class OpenBmpActionListener implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         JFileChooser openImageFileChooser = new JFileChooser(".");
         openImageFileChooser.setAcceptAllFileFilterUsed(false);
-        openImageFileChooser.setFileFilter(new FileNameExtensionFilter("BMP Files", "bmp"));
+        openImageFileChooser.setFileFilter(new FileNameExtensionFilter("BMP images", BmpFile.EXTENSION));
         if (openImageFileChooser.showDialog(mainWindow, "Open image") == JFileChooser.APPROVE_OPTION) {
             File selectedFile = openImageFileChooser.getSelectedFile();
             if (selectedFile.exists()) {

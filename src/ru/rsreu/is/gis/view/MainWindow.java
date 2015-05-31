@@ -3,6 +3,7 @@ package ru.rsreu.is.gis.view;
 import ru.rsreu.is.gis.action.DecodeActionListener;
 import ru.rsreu.is.gis.action.EncodeActionListener;
 import ru.rsreu.is.gis.action.OpenBmpActionListener;
+import ru.rsreu.is.gis.action.SaveBmpActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +11,14 @@ import java.io.File;
 
 public class MainWindow extends JFrame {
 
+    public static final String WINDOW_TITLE = "Wavelet encoder 1.0";
     private JMenuBar menuBar;
     private JImage imageComponent;
 
     private File currentFile;
 
     public MainWindow() {
+        super(WINDOW_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         initComponents();
@@ -34,6 +37,9 @@ public class MainWindow extends JFrame {
 
     public void imageLoaded(Image image, File imageFile) {
         currentFile = imageFile;
+        if (imageFile != null) {
+            setTitle(WINDOW_TITLE + " - " + imageFile.getAbsolutePath());
+        }
         imageComponent.setImage(image);
         pack();
         отцентроватьОкно();
@@ -65,7 +71,12 @@ public class MainWindow extends JFrame {
         JMenuItem openMenuItem = new JMenuItem("Open");
         fileMenu.add(openMenuItem);
         openMenuItem.addActionListener(new OpenBmpActionListener(this));
+
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+        fileMenu.add(saveMenuItem);
+        saveMenuItem.addActionListener(new SaveBmpActionListener(this));
         fileMenu.addSeparator();
+
         JMenuItem saveAsWavelet = new JMenuItem("Compress");
         fileMenu.add(saveAsWavelet);
         saveAsWavelet.addActionListener(new EncodeActionListener(this));

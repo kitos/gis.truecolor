@@ -9,9 +9,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
+import java.io.File;
 import java.nio.file.Files;
 
 public class EncodeActionListener implements ActionListener {
@@ -26,7 +24,7 @@ public class EncodeActionListener implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (mainWindow.getCurrentFile() == null) {
             JOptionPane.showMessageDialog(mainWindow, "No bmp file was opened. Nothing to encode.",
-                    "Warning", JOptionPane.WARNING_MESSAGE);
+                    "Warning", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
@@ -34,6 +32,7 @@ public class EncodeActionListener implements ActionListener {
             JFileChooser saveFileChooser = new JFileChooser(".");
             saveFileChooser.setAcceptAllFileFilterUsed(false);
             saveFileChooser.setFileFilter(new FileNameExtensionFilter("Wavelet encoded bmp", "wvl"));
+            saveFileChooser.setSelectedFile(new File("./unnamed.wvl"));
             if (saveFileChooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
                 BmpFile bmp = new BmpFile(mainWindow.getCurrentFile());
                 byte[][] encode = KursachUtils.encode(bmp.getPixels(), 4);

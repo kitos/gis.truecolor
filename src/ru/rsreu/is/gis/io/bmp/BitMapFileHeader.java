@@ -4,10 +4,10 @@ import ru.rsreu.is.gis.util.SerializationUtils;
 
 final public class BitMapFileHeader {
     public short bfType = 0x4d42; // 'BM'
-    public int bfSize; // размер файла в байтах
-    public short avgLength = 0; // размер массива усреднённых значений (используется в декодировании вейвлета)
+    public int bfSize; // СЂР°Р·РјРµСЂ С„Р°Р№Р»Р° РІ Р±Р°Р№С‚Р°С…
+    public short avgLength = 0; // СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° СѓСЃСЂРµРґРЅС‘РЅРЅС‹С… Р·РЅР°С‡РµРЅРёР№ (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РґРµРєРѕРґРёСЂРѕРІР°РЅРёРё РІРµР№РІР»РµС‚Р°)
     public short bfReserved2 = 0;
-    public int bfOffbits; // смещение в битах до начала изображения BitMapInfoHeader(40) + BitMapFileHeader(14) + Палитра (если есть)
+    public int bfOffbits; // СЃРјРµС‰РµРЅРёРµ РІ Р±РёС‚Р°С… РґРѕ РЅР°С‡Р°Р»Р° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ BitMapInfoHeader(40) + BitMapFileHeader(14) + РџР°Р»РёС‚СЂР° (РµСЃР»Рё РµСЃС‚СЊ)
 
     public static int length() {
         return SerializationUtils.length(BitMapFileHeader.class);

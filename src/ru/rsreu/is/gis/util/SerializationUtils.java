@@ -27,7 +27,7 @@ final public class SerializationUtils {
     }
 
     /**
-     * Преобразует объект (его поля) в массив байтов, пригодных для записи в файл.
+     * РџСЂРµРѕР±СЂР°Р·СѓРµС‚ РѕР±СЉРµРєС‚ (РµРіРѕ РїРѕР»СЏ) РІ РјР°СЃСЃРёРІ Р±Р°Р№С‚РѕРІ, РїСЂРёРіРѕРґРЅС‹С… РґР»СЏ Р·Р°РїРёСЃРё РІ С„Р°Р№Р».
      *
      * @param structure
      * @return
@@ -64,7 +64,7 @@ final public class SerializationUtils {
                 field.setAccessible(true);
                 Class<?> fieldClass = field.getType();
 
-                // if'ы можно заменить рефлексией как в #serialize
+                // if'С‹ РјРѕР¶РЅРѕ Р·Р°РјРµРЅРёС‚СЊ СЂРµС„Р»РµРєСЃРёРµР№ РєР°Рє РІ #serialize
                 if (fieldClass.isAssignableFrom(int.class)) {
                     int value = ByteBuffer.wrap(Arrays.copyOfRange(bytes, offset, offset += Integer.BYTES))
                             .order(byteOrder)
@@ -91,7 +91,7 @@ final public class SerializationUtils {
     }
 
     /**
-     * Используется в {@link #serialize}
+     * РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ {@link #serialize}
      *
      * @param i
      * @param byteOrder
@@ -102,7 +102,7 @@ final public class SerializationUtils {
     }
 
     /**
-     * Используется в {@link #serialize}
+     * РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ {@link #serialize}
      *
      * @param i
      * @param byteOrder

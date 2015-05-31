@@ -12,6 +12,8 @@ import java.util.Arrays;
 
 public class BmpFile {
 
+    public static final String EXTENSION = "bmp";
+
     public static final int COLOR_MAP_SIZE_8_BIT = 256 * 4;
 
     private BitMapFileHeader fileHeader;
@@ -38,7 +40,7 @@ public class BmpFile {
                 colorMap = Arrays.copyOfRange(imageBytes, endOfHeaders, endOfColorMap);
                 pixels = Arrays.copyOfRange(imageBytes, endOfColorMap, imageBytes.length);
             } else {
-                // к сожалению прога работает только с 8-ми битными изображениями
+                // Рє СЃРѕР¶Р°Р»РµРЅРёСЋ РїСЂРѕРіР° СЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ СЃ 8-РјРё Р±РёС‚РЅС‹РјРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏРјРё
                 throw new RuntimeException("Bit depth is not supported, try");
             }
         } catch (IOException e) {

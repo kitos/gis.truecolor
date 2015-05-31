@@ -18,7 +18,7 @@ public class JImage extends Component {
     public void paint(Graphics g) {
         super.paint(g);
         if (image != null) {
-            // центруем изображение
+            // С†РµРЅС‚СЂСѓРµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ
             int x = (getWidth() - image.getWidth(null)) / 2;
             int y = (getHeight() - image.getHeight(null)) / 2;
             g.drawImage(image, x, y, null);
@@ -35,5 +35,9 @@ public class JImage extends Component {
     public void setImage(Image image) {
         Objects.requireNonNull(image);
         this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

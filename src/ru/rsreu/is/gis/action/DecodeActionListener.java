@@ -36,7 +36,7 @@ public class DecodeActionListener implements ActionListener {
             bmp.setPixels(KursachUtils.decode(bmp.getPixels(), bmp.getFileHeader().avgLength));
             Path tempFile = null;
             try {
-                tempFile = Files.createTempFile(Paths.get("."), "temp", "bmp");
+                tempFile = Files.createTempFile(Paths.get("."), "temp", BmpFile.EXTENSION);
                 Files.write(tempFile, bmp.bytes());
                 BufferedImage image = ImageIO.read(tempFile.toFile());
                 mainWindow.imageLoaded(image, null);
